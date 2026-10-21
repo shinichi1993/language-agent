@@ -32,15 +32,13 @@ st.markdown("Trợ lý thông minh giúp bạn luyện tập và sửa lỗi **T
 # ==========================================
 # PHẦN 2: KHỞI TẠO API CLIENT VỚI KEY CỨNG
 # ==========================================
-# Thay vì bắt người dùng nhập, ta gán trực tiếp API key của bạn vào đây
-API_KEY = "AQ.Ab8RN6KFJjjNFSTNFmtCMseda7Tz5Y3LcyPjGiAE2CrTvUcgQA"
-
+# Lấy API Key từ cấu hình bảo mật của Streamlit
 try:
-    client = genai.Client(api_key=API_KEY)
+    api_key = st.secrets["GOOGLE_API_KEY"]
+    client = genai.Client(api_key=api_key)
 except Exception as e:
-    st.error(f"Lỗi khởi tạo API Client: {e}")
+    st.error("Chưa cấu hình GOOGLE_API_KEY trong Streamlit Secrets!")
     st.stop()
-
 
 # ==========================================
 # PHẦN 3: THANH CÔNG CỤ (SIDEBAR) ĐỂ TÙY CHỌN
